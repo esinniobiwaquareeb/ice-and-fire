@@ -75,7 +75,7 @@ To run this project, you will need to replace the following environment variable
 Clone the project
 
 ```bash
-  git clone https://github.com/quareeb/ice-and-fire.git
+  git clone https://github.com/esinniobiwaquareeb/ice-and-fire.git
 ```
 
 Go to the project directory
