@@ -266,3 +266,8 @@ To run tests, run the following command
 From here, you can easily navigate around the api without having to use test tools
 
 ![API Navigation Screenshot](https://i.ibb.co/NtzRpjx/Screenshot-2022-08-30-at-5-04-02-PM.png)
+### Sample Database
+
+The sample database named `database.sqlite` is placed at the database directory. View the content with any prefferred too or upload it to http://inloop.github.io/sqlite-viewer/
+
+![App Screenshot](https://i.ibb.co/7CRkdq2/Screenshot-2022-08-31-at-8-23-16-AM.png)
