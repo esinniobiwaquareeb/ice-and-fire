@@ -8,11 +8,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
     public function testRoot()
     {
         $response = $this->get('/api');
@@ -45,6 +40,29 @@ class BookTest extends TestCase
     // Unit Test for Getting a Single External Book starts here
     public function testSingleExternalBook() {
         $response = $this->json('GET', 'api/external-books/1');
+        $response->assertStatus(200);
+        $response->assertJsonFragment (
+            [
+                "status_code"=> 200,
+                "name"=> "A Game of Thrones",
+                "isbn"=> "978-0553103540",
+                "authors"=> [
+                "George R. R. Martin"
+                ],
+                "publisher"=> "Bantam Books",
+                "country"=> "United States",
+                "number_of_pages"=> 694,
+                "release_date"=> "1996-08-01T00:00:00"
+            ]
+
+        );
+
+    }
+    // Unit Test for Getting a Single External Book ends here
+
+    // Unit Test for Getting a Single External Book starts here
+    public function testFilteringExternalBook() {
+        $response = $this->json('GET', 'api/external-books?name=A Game of Thrones');
         $response->assertStatus(200);
         $response->assertJsonFragment (
             [
@@ -122,9 +140,7 @@ class BookTest extends TestCase
     public function testDeleteLocalBook() {
         $response = $this->json('GET', '/api/v1/books');
         $response->assertStatus(200);
-
         $book = json_decode($response->getContent(), true)['data'][0];
-
         $response = $this->json('DELETE', '/api/v1/books/'.$book['id']);
         $response->assertStatus(200);
         $name = $book['name'];

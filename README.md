@@ -25,19 +25,86 @@ To run this project, you will need to replace the following environment variable
 ```http
   GET /api/external-books
 ```
-
+```
+{
+    "status_code": 200,
+    "status": "success",
+    "data": 
+    [
+        {
+            "name": "A Game of Thrones",
+            "isbn": "978-0553103540",
+            "authors": [
+                "George R. R. Martin"
+            ],
+            "publisher": "Bantam Books",
+            "country": "United States",
+            "release_date": "1996-08-01T00:00:00",
+            "number_of_pages": 694
+        },
+        {
+            "name": "A Clash of Kings",
+            "isbn": "978-0553108033",
+            "authors": [
+                "George R. R. Martin"
+            ],
+            "publisher": "Bantam Books",
+            "country": "United States",
+            "release_date": "1999-02-02T00:00:00",
+            "number_of_pages": 768
+        },
+        ...
+        ...
+        ...
+    ]
+}
+```
 #### Get a single external books
 
 ```http
   GET /api/external-books/{id}
 ```
-
+```
+{
+    "status_code": 200,
+    "status": "success",
+    "data": 
+    {
+        "name": "A Game of Thrones",
+        "isbn": "978-0553103540",
+        "authors": [
+            "George R. R. Martin"
+        ],
+        "publisher": "Bantam Books",
+        "country": "United States",
+        "release_date": "1996-08-01T00:00:00",
+        "number_of_pages": 694
+    }
+}
+```
 #### Filter external books by name
 
 ```http
   GET /api/external-books?name=A Game of Throne
 ```
-
+```
+{
+    "status_code": 200,
+    "status": "success",
+    "data": 
+    {
+        "name": "A Game of Thrones",
+        "isbn": "978-0553103540",
+        "authors": [
+            "George R. R. Martin"
+        ],
+        "publisher": "Bantam Books",
+        "country": "United States",
+        "release_date": "1996-08-01T00:00:00",
+        "number_of_pages": 694
+    }
+}
+```
 ### Local Book API
 
 #### Get all books
@@ -45,31 +112,117 @@ To run this project, you will need to replace the following environment variable
 ```http
   GET /api/books
 ```
-
+```
+{
+    "status": "success",
+    "status_code": 200,
+    "data":
+    [
+        {
+            "id": 1,
+            "name": "Sample Book",
+            "isbn": "123-0553103540",
+            "authors": "Sample Author",
+            "country": "Nigeria",
+            "number_of_pages": "100",
+            "publisher": "Nigerian Publisher",
+            "release_date": "2022-08-31T00:00:00"
+        },
+        {
+            "id": 2,
+            "name": "Sample Book",
+            "isbn": "123-0553103540",
+            "authors": "Sample Author",
+            "country": "Nigeria",
+            "number_of_pages": "100",
+            "publisher": "Nigerian Publisher",
+            "release_date": "2022-08-31T00:00:00"
+        },
+        ...
+        ...
+        ...
+    ]
+}
+```
 #### Getting a single book by id
 
 ```http
   GET /api/books/{id}
 ```
-
+```
+{
+    "status": "success",
+    "status_code": 200,
+    "data":
+    {
+        "id": 1,
+        "name": "Sample Book",
+        "isbn": "123-0553103540",
+        "authors": "Sample Author",
+        "country": "Nigeria",
+        "number_of_pages": "100",
+        "publisher": "Nigerian Publisher",
+        "release_date": "2022-08-31T00:00:00"
+    }
+}
+```
 #### Creating a Book
 
 ```http
   POST /api/books
 ```
-
+```
+{
+    "status": "success",
+    "status_code": 200,
+    "data":
+    {
+        "id": 1,
+        "name": "Sample Book",
+        "isbn": "123-0553103540",
+        "authors": "Sample Author",
+        "country": "Nigeria",
+        "number_of_pages": "100",
+        "publisher": "Nigerian Publisher",
+        "release_date": "2022-08-31T00:00:00"
+    }
+}
+```
 #### Updating a Book
 
 ```http
   PATCH /api/books/{id}
 ```
-
+```
+{
+    "status": "success",
+    "status_code": 201,
+    "data":
+    {
+        "id": 1,
+        "name": "Sample Book Updated",
+        "isbn": "123-0553103540",
+        "authors": "Sample Author",
+        "country": "Nigeria",
+        "number_of_pages": "100",
+        "publisher": "Nigerian Publisher",
+        "release_date": "2022-08-31T00:00:00"
+    }
+}
+```
 #### Deleting a book
 
 ```http
   DELETE /api/books/{id}
 ```
-
+```
+{
+   "status_code":204,
+   "status":"success",
+   "message":"The book ‘Sample Book’ was deleted successfully",
+   "data":[]
+}
+```
 ## Run Locally
 
 Clone the project

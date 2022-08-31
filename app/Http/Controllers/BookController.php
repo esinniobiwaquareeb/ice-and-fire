@@ -1,11 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Http\Requests\StoreBookRequest;
-use App\Http\Requests\UpdateBookRequest;
 use App\Models\Book;
-
 use App\Helpers\APIHelper;
 use Illuminate\Http\Request;
 use App\Http\Resources\BookResource;
@@ -40,18 +36,17 @@ class BookController extends Controller
         }
         $response = $this->apiHandler->getAllExternalBooks($params);
         $books = $response["body"];
-        // $books = json_decode($books, true);
         if($books !== FALSE){           
             return response()->json([
                 "status_code"=>200, 
                 "status"=>"success",
-                "data" => (new BookResource($books, true))->withOnly(['name', 'isbn', 'authors', 'numberOfPages','publisher', 'country','release_date', 'number_of_pages']),
+                "data" => (new BookResource($books, true))->withOnly(['name', 'isbn', 'authors','publisher', 'country','release_date', 'number_of_pages']),
             ], 200);
         }
         else{
             return response()->json([                
                 "status_code"=>404,
-                "Status"=>"not found",
+                "Status"=>"Resource not found",
                 "data"=>[]
             ], 404);
         }
@@ -69,14 +64,13 @@ class BookController extends Controller
                 'release_date'    => $request->release_date,
                 'isbn'            => $request->isbn,
             ]);
-            // $book->id,
             unset($book->created_at, $book->updated_at);
             return $this->apiHandler->handleResponse($book, 201, 'success');
         }
         if($method == 'GET') {
             $books = Book::get();
             foreach($books as $key => $item){
-                //created_at and updated_at from output array
+                //remove created_at and updated_at from output array to conform with output required
                 unset( $books[$key]->created_at, $books[$key]->updated_at);
             }
             return $this->apiHandler->handleResponse($books, 200, 'success');
@@ -104,7 +98,6 @@ class BookController extends Controller
             $message = "The resource you are looking for could not be found!";
             $responseType = 401;
         }
-
         return $this->apiHandler->handleResponse($message, $responseType, $status);
     }
 
@@ -112,11 +105,8 @@ class BookController extends Controller
     {
         $book = Book::where('id', $id)->first();
         if ($book){
-            
             // remove book id, created_at and updated_at from the output
-
-            unset($book->id,$book->created_at,$book->updated_at);
-
+            unset($book->created_at,$book->updated_at);
             $status = "success";
             $responseType = 200;
             $data = $book;
@@ -135,7 +125,7 @@ class BookController extends Controller
             $book->delete();
             $status = "success";
             $message = "The book $book->name was deleted successfully";
-            $responseType = 204;
+            $responseType = 200;
 
         } else {
             $status = "success";
